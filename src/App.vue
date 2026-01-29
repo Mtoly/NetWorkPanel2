@@ -42,9 +42,9 @@
       <div style="width: fit-content;margin-left: auto;margin-right: auto;">
         <span style="color:var(--el-color-info);font-size: 12px;">
           本工具由
-            <el-link style="vertical-align: -2px;" type="info" @click='open("https://edgeone.ai/zh?from=net.netart.cn")' target="_blank">
-              <img src="https://edgeone.ai/favicon.ico" alt="括彩CDN" width="15" height="15">
-              Tencent Edgeone
+            <el-link style="vertical-align: -2px;" type="info" @click='open("https://user.lucdn.cn/?aff=471XA")' target="_blank">
+              <img src="https://file.io0.icu/maowo.png" alt="语鹿云盾" width="15" height="15">
+              语鹿云盾
             </el-link>
           提供CDN服务
         </span>

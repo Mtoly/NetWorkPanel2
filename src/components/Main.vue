@@ -87,7 +87,7 @@
     </template>
   </el-dialog>
 
-  <MarkUI :show="showMark" :loginInfo="loginInfo" />
+  <MarkUI :show="showMark" />
   <audio v-if="isMobile && !isIOS && !isMiuiBrowser && speedTestStore.runBackground" @canplay="handleAudioCanPlay" @pause="handleAudioPause" @play="handleAudioPlay" controls loop ref="audioDom" style="display:none">
     <source :src="andoridSound" type="audio/mpeg">
   </audio>
@@ -98,7 +98,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, onMounted, type Ref } from 'vue'
+import { ref, watch, onMounted, onUnmounted, type Ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { Loading, Histogram, FullScreen, TrendCharts, Hide } from '@element-plus/icons-vue'
 import iosSound from "../assets/ios.mp3"
@@ -106,8 +106,9 @@ import andoridSound from "../assets/android.mp3"
 import { useSpeedTestStore } from '@/stores/speedTest'
 import { useNodesStore } from '@/stores/nodes'
 import { useUserStore } from '@/stores/user'
+import { useRankingStore } from '@/stores/ranking'
 import { checkUrl, formatter } from '@/services/speedTest'
-import { api } from '@/services/api'
+import { rankingApi } from '@/services/ranking'
 import NodeSelector from './NodeSelector.vue'
 import ControlPanel from './ControlPanel.vue'
 import StatisticsDisplay from './StatisticsDisplay.vue'
@@ -120,10 +121,10 @@ const props = defineProps<{ isVisible: Boolean }>()
 const speedTestStore = useSpeedTestStore()
 const nodesStore = useNodesStore()
 const userStore = useUserStore()
+const rankingStore = useRankingStore()
 
 const showMark = ref({ show: false })
 const isFullScreen = ref(false)
-const loginInfo = { AccessToken: userStore.accessToken }
 const chartRef = ref<InstanceType<typeof SpeedChart> | null>(null)
 const audioDom = ref<HTMLAudioElement | null>(null)
 
@@ -226,23 +227,15 @@ async function uploadLog() {
   const time = now - speedTestStore.state.lastLogTime
   speedTestStore.state.logged = speedTestStore.state.bytesUsed
   speedTestStore.state.lastLogTime = now
-  const resp = await fetch(import.meta.env.VITE_API_URL + "log", {
-    method: "POST",
-    mode: "cors",
-    redirect: "follow",
-    referrerPolicy: "no-referrer",
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      AccessToken: userStore.accessToken,
-      url: nodesStore.runUrl,
-      threadNum: speedTestStore.threadNum,
-      used: num,
-      time: time
-    })
+  const data = await rankingApi.uploadLog({
+    AccessToken: rankingStore.accessToken,
+    url: nodesStore.runUrl,
+    threadNum: speedTestStore.threadNum,
+    used: num,
+    time: time
   })
-  const data = await resp.json()
   if (data.status == -1) {
-    userStore.clearAccessToken()
+    rankingStore.clearAccessToken()
   }
 }
 
@@ -380,6 +373,11 @@ const editSpeedUse = () => {
 
 onMounted(() => {
   if (speedTestStore.autoStart) tryStart()
+})
+
+onUnmounted(() => {
+  tasks.forEach(i => clearInterval(i))
+  tasks = []
 })
 </script>
 

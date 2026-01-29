@@ -4,9 +4,15 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from 'vue'
-import * as echarts from 'echarts'
-import type { EChartsType } from 'echarts'
+import { init } from 'echarts/core'
+import { LineChart } from 'echarts/charts'
+import { GridComponent, TooltipComponent, ToolboxComponent, TitleComponent } from 'echarts/components'
+import { CanvasRenderer } from 'echarts/renderers'
+import type { EChartsType } from 'echarts/core'
+import { use } from 'echarts/core'
 import { formatter } from '@/services/speedTest'
+
+use([LineChart, GridComponent, TooltipComponent, ToolboxComponent, TitleComponent, CanvasRenderer])
 
 const props = defineProps<{
   show: boolean
@@ -20,7 +26,7 @@ let stepLength = 1
 
 onMounted(() => {
   if (!chartContainer.value) return
-  myChart = echarts.init(chartContainer.value)
+  myChart = init(chartContainer.value)
   
   const chartOption = {
     tooltip: {

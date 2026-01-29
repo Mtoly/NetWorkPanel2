@@ -77,7 +77,7 @@
 const props = defineProps({
     isVisible: Boolean
 })
-import { reactive,ref, type Ref } from 'vue'
+import { reactive,ref, type Ref, onUnmounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { toClipboard } from '@soerenmartius/vue3-clipboard'
 import { Search } from '@element-plus/icons-vue'
@@ -149,6 +149,7 @@ async function handleIP(ip: string) {
     return info
 }
 
+let localIpTimer: number | null = null;
 (async function watchLocalIp() {
     if (props.isVisible) {
         try {
@@ -159,9 +160,16 @@ async function handleIP(ip: string) {
             console.log(error)
         }
     }
-    setTimeout(watchLocalIp, 60000)
+    localIpTimer = setTimeout(watchLocalIp, 60000)
 })();
 
+onUnmounted(() => {
+    if (localIpTimer) clearTimeout(localIpTimer);
+    if (cloudflareTimer) clearTimeout(cloudflareTimer);
+    if (cnLayTimer) clearTimeout(cnLayTimer);
+});
+
+let cloudflareTimer: number | null = null;
 const watchCloudflare = async(host: string) => {
     if (props.isVisible) {
         try {
@@ -178,13 +186,14 @@ const watchCloudflare = async(host: string) => {
             console.log(error)
         }
     }
-    setTimeout(watchCloudflare, 1000, host)
+    cloudflareTimer = setTimeout(watchCloudflare, 60000, host)
 }
 
 watchCloudflare("cp.cloudflare.com")
 // watchCloudflare("chat.openai.com")
 
-;(async function getCNLay() {
+let cnLayTimer: number | null = null;
+(async function getCNLay() {
     if (props.isVisible) {
         try {
             var start_timestamp = new Date().getTime();
@@ -195,7 +204,7 @@ watchCloudflare("cp.cloudflare.com")
             ipInfo.layLocal = 0
         }
     }
-    setTimeout(getCNLay, 1000)
+    cnLayTimer = setTimeout(getCNLay, 5000)
 })();
 </script>
 

@@ -1,6 +1,6 @@
 import CryptoJS from 'crypto-js'
 
-const SECRET_KEY = 'NetworkPanel_Secret_Key_2024'
+const SECRET_KEY = import.meta.env.VITE_CRYPTO_KEY || 'NetworkPanel_Default_Key_2024'
 
 export const encrypt = (text: string): string => {
   return CryptoJS.AES.encrypt(text, SECRET_KEY).toString()
