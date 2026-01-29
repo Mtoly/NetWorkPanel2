@@ -22,9 +22,16 @@
       </div>
     </el-header>
     <el-main>
-      <MainUI :isVisible="isVisible" />
+      <router-view :isVisible="isVisible" />
       <br>
-      <IPinfoUI :isVisible="isVisible" />
+      <Suspense>
+        <template #default>
+          <IPinfoUI :isVisible="isVisible" />
+        </template>
+        <template #fallback>
+          <div>加载中...</div>
+        </template>
+      </Suspense>
     </el-main>
     <div style="height: fit-content;padding-bottom: 10px;">
       <div style="width: fit-content;margin-left: auto;margin-right: auto;">
@@ -193,11 +200,11 @@
 </template>
 
 <script lang="ts" setup>
-import MainUI from "./components/Main.vue"
-import IPinfoUI from "./components/IPinfo.vue"
-import { ref, reactive, watch } from 'vue'
+import { defineAsyncComponent, ref, reactive, watch } from 'vue'
 import { ElMessage } from 'element-plus'
 import { toClipboard } from '@soerenmartius/vue3-clipboard'
+
+const IPinfoUI = defineAsyncComponent(() => import('./components/IPinfo.vue'))
 var isAndroid = /Android/i.test(navigator.userAgent)
 const isVisible = ref(true)
 const downLoadAPPTableVisible = ref(false)
@@ -222,10 +229,7 @@ const open = (url:string) => {
 
 let copyText = (txt:string) => {
   toClipboard(txt)
-  ElMessage.info({
-    dangerouslyUseHTMLString: true,
-    message: '<center>已经复制到剪切板</center>',
-  })
+  ElMessage.info('已经复制到剪切板')
 }
 document.addEventListener("visibilitychange", function () {
   var string = document.visibilityState

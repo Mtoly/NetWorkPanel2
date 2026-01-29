@@ -104,21 +104,17 @@ const onQuery = async(ip:string) => {
 const ipInfo: {local:any, cloudflare:any,layLocal:any,layCloudflare:any} = reactive({local:null, cloudflare:null,layLocal:null,layCloudflare:null})
 const copy = (ip: string) => {
     toClipboard(ip)
-    ElMessage.success({
-        dangerouslyUseHTMLString: true,
-        message: `已经复制IP地址：<br><strong>${ip}</strong>`,
-    })
+    ElMessage.success(`已经复制IP地址：${ip}`)
 }
 
 async function queryIp(ip: string) {
-    const rsp = await fetch(import.meta.env.VITE_API_URL + "ip.ajax?ip=" + ip, {
+    const rsp = await fetch(`https://ipapi.io0.icu/${ip}`, {
         method: "GET",
         mode: "cors",
         redirect: "follow",
         referrerPolicy: "no-referrer"
     });
-    let resp = await rsp.json();
-    return resp['data']
+    return await rsp.json();
 }
 
 let failure = false
@@ -156,9 +152,9 @@ async function handleIP(ip: string) {
 (async function watchLocalIp() {
     if (props.isVisible) {
         try {
-            const response = await fetch(import.meta.env.VITE_API_URL + 'ip.ajax', { referrerPolicy: 'no-referrer' });
+            const response = await fetch('https://ipapi.io0.icu/', { referrerPolicy: 'no-referrer' });
             let resp = await response.json();
-            ipInfo.local = await handleIP(resp["data"]["ip"])
+            ipInfo.local = await handleIP(resp.ip)
         } catch (error) {
             console.log(error)
         }
