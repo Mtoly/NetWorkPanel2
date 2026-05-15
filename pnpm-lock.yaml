@@ -18,7 +18,7 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0
       echarts:
-        specifier: ^5.6.0
+        specifier: ^5.4.3
         version: 5.6.0
       element-plus:
         specifier: ~2.3.14
@@ -30,23 +30,23 @@ importers:
         specifier: ^3.0.4
         version: 3.0.4(typescript@5.1.6)(vue@3.5.17(typescript@5.1.6))
       vue:
-        specifier: ^3.5.17
+        specifier: ^3.3.4
         version: 3.5.17(typescript@5.1.6)
       vue-router:
         specifier: ^4.6.4
         version: 4.6.4(vue@3.5.17(typescript@5.1.6))
     devDependencies:
       '@tsconfig/node18':
-        specifier: ^18.2.4
+        specifier: ^18.2.2
         version: 18.2.4
       '@types/crypto-js':
         specifier: ^4.2.2
         version: 4.2.2
       '@types/node':
-        specifier: ^18.19.115
+        specifier: ^18.17.15
         version: 18.19.115
       '@vitejs/plugin-vue':
-        specifier: ^4.6.2
+        specifier: ^4.3.4
         version: 4.6.2(vite@6.4.2(@types/node@18.19.115)(sass@1.89.2)(terser@5.43.1))(vue@3.5.17(typescript@5.1.6))
       '@vue/test-utils':
         specifier: ^2.4.6
@@ -61,10 +61,10 @@ importers:
         specifier: ^4.1.5
         version: 4.1.5
       rollup-plugin-visualizer:
-        specifier: ^5.14.0
+        specifier: ^5.9.2
         version: 5.14.0(rollup@4.60.1)
       sass:
-        specifier: ^1.89.2
+        specifier: ^1.68.0
         version: 1.89.2
       typescript:
         specifier: ~5.1.6
@@ -76,7 +76,7 @@ importers:
         specifier: ^4.0.18
         version: 4.0.18(@types/node@18.19.115)(happy-dom@20.8.9)(sass@1.89.2)(terser@5.43.1)
       vue-tsc:
-        specifier: ^1.8.27
+        specifier: ^1.8.11
         version: 1.8.27(typescript@5.1.6)
 
 packages:
@@ -285,9 +285,6 @@ packages:
 
   '@jridgewell/source-map@0.3.11':
     resolution: {integrity: sha512-ZMp1V8ZFcPG5dIWnQLr3NSI1MiCU7UETdS/A0G8V/XWHvJv3ZsFqutJn1Y5RPmAPX6F3BiE397OqveU/9NCuIA==}
-
-  '@jridgewell/sourcemap-codec@1.5.4':
-    resolution: {integrity: sha512-VT2+G1VQs/9oz078bLrYbecdZKs912zQlkelYpuf+SXF+QvZDYJlbx/LSx+meSAwdDFnF8FVXW92AVjjkVmgFw==}
 
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
@@ -1223,9 +1220,6 @@ packages:
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
-  magic-string@0.30.17:
-    resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
-
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
@@ -1989,8 +1983,6 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.31
     optional: true
 
-  '@jridgewell/sourcemap-codec@1.5.4': {}
-
   '@jridgewell/sourcemap-codec@1.5.5': {}
 
   '@jridgewell/trace-mapping@0.3.31':
@@ -2261,7 +2253,7 @@ snapshots:
       '@vue/compiler-ssr': 3.5.17
       '@vue/shared': 3.5.17
       estree-walker: 2.0.2
-      magic-string: 0.30.17
+      magic-string: 0.30.21
       postcss: 8.5.14
       source-map-js: 1.2.1
 
@@ -3019,10 +3011,6 @@ snapshots:
   lodash@4.17.21: {}
 
   lru-cache@10.4.3: {}
-
-  magic-string@0.30.17:
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.5.4
 
   magic-string@0.30.21:
     dependencies:
