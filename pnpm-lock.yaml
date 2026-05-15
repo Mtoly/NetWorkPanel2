@@ -18,7 +18,7 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0
       echarts:
-        specifier: ^5.4.3
+        specifier: ^5.6.0
         version: 5.6.0
       element-plus:
         specifier: ~2.3.14
@@ -30,23 +30,23 @@ importers:
         specifier: ^3.0.4
         version: 3.0.4(typescript@5.1.6)(vue@3.5.17(typescript@5.1.6))
       vue:
-        specifier: ^3.3.4
+        specifier: ^3.5.17
         version: 3.5.17(typescript@5.1.6)
       vue-router:
         specifier: ^4.6.4
         version: 4.6.4(vue@3.5.17(typescript@5.1.6))
     devDependencies:
       '@tsconfig/node18':
-        specifier: ^18.2.2
+        specifier: ^18.2.4
         version: 18.2.4
       '@types/crypto-js':
         specifier: ^4.2.2
         version: 4.2.2
       '@types/node':
-        specifier: ^18.17.15
+        specifier: ^18.19.115
         version: 18.19.115
       '@vitejs/plugin-vue':
-        specifier: ^4.3.4
+        specifier: ^4.6.2
         version: 4.6.2(vite@6.4.2(@types/node@18.19.115)(sass@1.89.2)(terser@5.43.1))(vue@3.5.17(typescript@5.1.6))
       '@vue/test-utils':
         specifier: ^2.4.6
@@ -61,10 +61,10 @@ importers:
         specifier: ^4.1.5
         version: 4.1.5
       rollup-plugin-visualizer:
-        specifier: ^5.9.2
+        specifier: ^5.14.0
         version: 5.14.0(rollup@4.60.1)
       sass:
-        specifier: ^1.68.0
+        specifier: ^1.89.2
         version: 1.89.2
       typescript:
         specifier: ~5.1.6
@@ -76,7 +76,7 @@ importers:
         specifier: ^4.0.18
         version: 4.0.18(@types/node@18.19.115)(happy-dom@20.8.9)(sass@1.89.2)(terser@5.43.1)
       vue-tsc:
-        specifier: ^1.8.11
+        specifier: ^1.8.27
         version: 1.8.27(typescript@5.1.6)
 
 packages:
@@ -1207,8 +1207,8 @@ packages:
     resolution: {integrity: sha512-Kx8hMakjX03tiGTLAIdJ+lL0htKnXjEZN6hk/tozf/WOuYGdZBJrZ+rCJRbVCugsjB3jMLn9746NsQIf5VjBMw==}
     engines: {node: '>=4'}
 
-  lodash-es@4.17.21:
-    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+  lodash-es@4.18.1:
+    resolution: {integrity: sha512-J8xewKD/Gk22OZbhpOVSwcs60zhd95ESDwezOFuA3/099925PdHJ7OFHNTGtajL3AlZkykD32HykiMo+BIBI8A==}
 
   lodash-unified@1.0.3:
     resolution: {integrity: sha512-WK9qSozxXOD7ZJQlpSqOT+om2ZfcT4yO+03FuzAHD0wF6S0l0090LRPDx3vhTTLZ8cFKpBn+IOcVXK6qOcIlfQ==}
@@ -2590,8 +2590,8 @@ snapshots:
       dayjs: 1.11.13
       escape-html: 1.0.3
       lodash: 4.17.21
-      lodash-es: 4.17.21
-      lodash-unified: 1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21)
+      lodash-es: 4.18.1
+      lodash-unified: 1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.18.1)(lodash@4.17.21)
       memoize-one: 6.0.0
       normalize-wheel-es: 1.2.0
       vue: 3.5.17(typescript@5.1.6)
@@ -3016,13 +3016,13 @@ snapshots:
       pify: 3.0.0
       strip-bom: 3.0.0
 
-  lodash-es@4.17.21: {}
+  lodash-es@4.18.1: {}
 
-  lodash-unified@1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21):
+  lodash-unified@1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.18.1)(lodash@4.17.21):
     dependencies:
       '@types/lodash-es': 4.17.12
       lodash: 4.17.21
-      lodash-es: 4.17.21
+      lodash-es: 4.18.1
 
   lodash@4.17.21: {}
 
