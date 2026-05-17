@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref,watch,onMounted, defineModel, watchEffect, onUnmounted} from 'vue'
+import {ref,watch,onMounted, watchEffect, onUnmounted} from 'vue'
 import NoSleep from 'nosleep.js';
 const props=defineProps({
   state: { type: Object, required: true },

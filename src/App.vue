@@ -203,6 +203,7 @@
 import { defineAsyncComponent, ref, reactive, watch } from 'vue'
 import { ElMessage } from 'element-plus'
 import { toClipboard } from '@soerenmartius/vue3-clipboard'
+import { safeOpenExternalUrl } from '@/services/url'
 
 const IPinfoUI = defineAsyncComponent(() => import('./components/IPinfo.vue'))
 var isAndroid = /Android/i.test(navigator.userAgent)
@@ -224,7 +225,9 @@ watch(downLoadAPPTableVisible,(n)=>{
 
 const aboutVisible = ref(false)
 const open = (url:string) => {
-  window.open(url)
+  if (!safeOpenExternalUrl(url)) {
+    ElMessage.error('链接地址不安全，已阻止打开')
+  }
 }
 
 let copyText = (txt:string) => {

@@ -1,9 +1,26 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useSpeedTestStore } from '@/stores/speedTest'
 
 describe('SpeedTest Store', () => {
   beforeEach(() => {
+    const storageMock = (() => {
+      let store: Record<string, string> = {}
+      return {
+        getItem: vi.fn((key: string) => (key in store ? store[key] : null)),
+        setItem: vi.fn((key: string, value: string) => {
+          store[key] = value
+        }),
+        removeItem: vi.fn((key: string) => {
+          delete store[key]
+        }),
+        clear: vi.fn(() => {
+          store = {}
+        })
+      }
+    })()
+
+    vi.stubGlobal('localStorage', storageMock)
     setActivePinia(createPinia())
     localStorage.clear()
   })

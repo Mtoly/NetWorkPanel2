@@ -3,6 +3,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useRankingStore } from '@/stores/ranking'
 import { rankingApi } from '@/services/ranking'
+import { safeOpenExternalUrl } from '@/services/url'
 
 const rankingStore = useRankingStore()
 const imgBase64 = ref("")
@@ -13,7 +14,9 @@ const showRank = ref(false)
 let isMounted = false
 
 const openQQ = () => {
-  window.open(thirdQQLoginUrl.value, '_blank')
+  if (!safeOpenExternalUrl(thirdQQLoginUrl.value)) {
+    ElMessage.error('登录链接不安全，已阻止打开')
+  }
 }
 
 const desMap = [["本小时", "今天", "本月", "今年"], ["上小时", "昨天", "上月", "去年"]]
