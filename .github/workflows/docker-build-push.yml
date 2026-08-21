@@ -8,10 +8,13 @@ on:
       - main
       - master
     # 当创建标签时触发
-    tag:
-      - 'v*'
+    tags:
+      - "v*"
   # 允许手动触发
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 # 环境变量
 env:
@@ -21,7 +24,7 @@ env:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    
+
     steps:
       # 检出代码
       - name: Checkout code
@@ -43,7 +46,7 @@ jobs:
 
       # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -81,6 +84,7 @@ jobs:
 
       # 构建并推送 Docker 镜像
       - name: Build and push Docker image
+        id: build
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -92,4 +96,4 @@ jobs:
 
       # 输出镜像摘要
       - name: Image digest
-        run: echo ${{ steps.build.outputs.digest }} 
+        run: echo ${{ steps.build.outputs.digest }}
